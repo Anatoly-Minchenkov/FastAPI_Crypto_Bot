@@ -1,11 +1,9 @@
-import copy
-
 import uvicorn
 
 from database import crud
 import pydantic_models
 import fastapi
-from fastapi import FastAPI, Query, Body
+from fastapi import FastAPI
 
 
 api = FastAPI()

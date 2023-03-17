@@ -90,16 +90,16 @@ def admin_panel(message):
     bot.send_message(message.chat.id, text, reply_markup=markup)
 
 
-# делаем проверку на админ ли боту пишет проверяем текст сообщения
+# Проверка на Админа
 @bot.message_handler(func=lambda message: message.from_user.id == tg_admin_id and message.text == "Все юзеры")
 def all_users(message):
     text = f'Юзеры:'
     users = client.get_users()
-    inline_markup = telebot.types.InlineKeyboardMarkup()  # создаем объект с инлайн-разметкой
-    for user in users:  # в цикле создаем 3 кнопки и добавляем их поочередно в нашу разметку
+    inline_markup = telebot.types.InlineKeyboardMarkup()
+    for user in users:
         inline_markup.add(telebot.types.InlineKeyboardButton(text=f'Юзер: {user["tg_ID"]}',
                                                              callback_data=f"user_{user['tg_ID']}"))
-        # в коллбеке у нас будет текст, который содержит айди юзеров
+        # в коллбеке текст, который содержит айди юзеров
     bot.send_message(message.chat.id, text,
                      reply_markup=inline_markup)
 
@@ -237,5 +237,4 @@ def get_hash_of_transaction(message):
         menu(message)
 
 
-# запускаем бота этой командой:
 bot.infinity_polling()
